@@ -1,7 +1,5 @@
 const { Schema, model, Types } = require('mongoose');
-// use dayjs for date format
-const dayjs = require('dayjs');
-const now = (dayjs().format('h:mm a MMM DD, YYYY'));
+const dateFormat =  require('../utils/dateFormat')
 
 const ReactionSchema = new Schema(
   {
@@ -16,12 +14,12 @@ const ReactionSchema = new Schema(
     },
     username: {
       type: String,
-      required: True
+      required: true
     },
     createdAt: {
       type: Date,
       default: Date.now,
-      get: now
+      get: timestamp => dateFormat(timestamp)
     }
   },
   {

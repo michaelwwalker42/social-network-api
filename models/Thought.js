@@ -1,8 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 const ReactionSchema = require('./Reaction');
-// use dayjs for date format
-const dayjs = require('dayjs');
-const now = (dayjs().format('h:mm a MMM DD, YYYY'));
+const dateFormat =  require('../utils/dateFormat')
 
 const ThoughtSchema = new Schema(
   {
@@ -15,7 +13,7 @@ const ThoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: now
+      get: timestamp => dateFormat(timestamp)
     },
     username: {
       type: String,
@@ -25,7 +23,6 @@ const ThoughtSchema = new Schema(
   },
   {
     toJSON: {
-      virtuals: true,
       getters: true
     },
     id: false
@@ -36,6 +33,6 @@ ThoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });
 
-const Thought = model('Thought', UserSchema);
+const Thought = model('Thought', ThoughtSchema);
 
 module.exports = Thought;

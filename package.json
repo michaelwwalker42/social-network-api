@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/michaelwwalker42/social-network-api#readme",
   "dependencies": {
-    "dayjs": "^1.10.8",
     "express": "^4.17.3",
     "mongoose": "^6.2.4"
   }
