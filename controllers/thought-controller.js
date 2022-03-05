@@ -85,7 +85,28 @@ const thoughtController = {
       })
       .catch(err => res.status(400).json(err));
   },
-  createReaction() { },
+  createReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $push: { reactions: req.body } },
+      { new: true, runValidators: true }
+    )
+      .select('-__v')
+      .populate(
+        {
+          path: 'reactions',
+          select: '-__v'
+        }
+      )
+      .then(thoughtData => {
+        if (!thoughtData) {
+          res.status(404).json({ message: 'No thought found with this id' })
+          return;
+        }
+        res.json(thoughtData);
+      })
+      .catch(err => res.status(400).json(err));
+  },
   deleteReaction() { }
 };
 
