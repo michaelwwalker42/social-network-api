@@ -47,7 +47,22 @@ const thoughtController = {
       })
       .catch(err => res.status(400).json(err));
   },
-  updateThought() { },
+
+  updateThought(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $set: req.body },
+      { new: true }
+    )
+      .then(thoughtData => {
+        if (!thoughtData) {
+          res.status(404).json({ message: 'No thoughts found with this id' })
+          return;
+        }
+        res.json(thoughtData);
+      })
+      .catch(err => res.status(400).json(err));
+  },
   deleteThought() { },
   createReaction() { },
   deleteReaction() { }
