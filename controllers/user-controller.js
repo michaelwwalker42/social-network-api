@@ -2,11 +2,9 @@ const { User } = require('../models')
 
 const userController = {
   createUser(req, res) {
-    User.create(req.body).then((userData) => {
-      res.json(userData)
-    }).catch((err) => {
-      res.json(err)
-    })
+    User.create(req.body)
+      .then(userData => res.json(userData))
+      .catch(err => res.json(err));
   },
   getUsers(req, res) {
     User.find()
@@ -31,7 +29,13 @@ const userController = {
           select: '-__v'
         }
       )
-      .then(userData => res.json(userData))
+      .then(userData => {
+        if (!userData) {
+          res.status(404).json({ message: 'No user found with this id' })
+          return;
+        }
+        res.json(userData);
+      })
       .catch(err => res.status(400).json(err));
   },
   updateUser(req, res) {
@@ -47,7 +51,13 @@ const userController = {
     User.findOneAndDelete(
       { _id: req.params.userId },
     )
-      .then(userData => res.json(userData))
+      .then(userData => {
+        if (!userData) {
+          res.status(404).json({ message: 'No user found with this id' })
+          return;
+        }
+        res.json(userData);
+      })
       .catch(err => res.status(400).json(err));
   },
 
@@ -59,7 +69,7 @@ const userController = {
     )
       .then(userData => {
         if (!userData) {
-          res.status(400).json({ message: 'No user found with this id' })
+          res.status(404).json({ message: 'No user found with this id' })
           return;
         }
         res.json(userData);
@@ -74,7 +84,7 @@ const userController = {
     )
       .then(userData => {
         if (!userData) {
-          res.status(400).json({ message: 'No user found with this id' })
+          res.status(404).json({ message: 'No user found with this id' })
           return;
         }
         res.json(userData);
