@@ -1,6 +1,9 @@
 const { User, Thought } = require('../models');
 
 const thoughtController = {
+
+// POST thought
+// /api/thoughts
   createThought(req, res) {
     Thought.create(req.body)
       .then(({ _id }) => {
@@ -19,14 +22,18 @@ const thoughtController = {
       })
       .catch(err => res.json(err));
   },
-
+// GET thoughts route
+// /api/thoughts
   getThoughts(req, res) {
     Thought.find()
       .select('-__v')
+      // sort thoughts by newest timestamp
+      .sort({ _id: -1 })
       .then(thoughtData => res.json(thoughtData))
       .catch(err => res.json(err))
   },
-
+// GET single thought route
+//  /api/thoughts/:thoughtId
   getSingleThought(req, res) {
     Thought.findOne(
       { _id: req.params.thoughtId }
@@ -47,7 +54,8 @@ const thoughtController = {
       })
       .catch(err => res.status(400).json(err));
   },
-
+// PUT thought route
+//  /api/thoughts/:thoughtId
   updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -63,6 +71,8 @@ const thoughtController = {
       })
       .catch(err => res.status(400).json(err));
   },
+// DELETE thought route
+//  /api/thoughts/:thoughtId
   deleteThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
       .then(deletedThought => {
@@ -85,6 +95,9 @@ const thoughtController = {
       })
       .catch(err => res.status(400).json(err));
   },
+
+// POST reaction route
+//  /api/thoughts/:thoughtId/reactions
   createReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -107,6 +120,9 @@ const thoughtController = {
       })
       .catch(err => res.status(400).json(err));
   },
+
+// DELETE reaction 
+//   /api/thoughts//:thoughtId/reactions/:reactionId
   deleteReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
