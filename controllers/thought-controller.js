@@ -22,10 +22,31 @@ const thoughtController = {
 
   getThoughts(req, res) {
     Thought.find()
+      .select('-__v')
       .then(thoughtData => res.json(thoughtData))
       .catch(err => res.json(err))
   },
-  getSingleThought() { },
+
+  getSingleThought(req, res) {
+    Thought.findOne(
+      { _id: req.params.thoughtId }
+    )
+      .select('-__v')
+      .populate(
+        {
+          path: 'reactions',
+          select: '-__v'
+        }
+      )
+      .then(thoughtData => {
+        if (!thoughtData) {
+          res.status(404).json({ message: 'No thoughts found with this id' })
+          return;
+        }
+        res.json(thoughtData);
+      })
+      .catch(err => res.status(400).json(err));
+  },
   updateThought() { },
   deleteThought() { },
   createReaction() { },
