@@ -52,7 +52,7 @@ const thoughtController = {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $set: req.body },
-      { new: true }
+      { new: true, runValidators: true }
     )
       .then(thoughtData => {
         if (!thoughtData) {
@@ -63,7 +63,17 @@ const thoughtController = {
       })
       .catch(err => res.status(400).json(err));
   },
-  deleteThought() { },
+  deleteThought(req, res) {
+    Thought.findOneAndDelete({ _id: req.params.thoughtId })
+      .then(deletedThought => {
+        if (!deletedThought) {
+          res.status(404).json({ message: 'No thoughts found with this id' })
+          return;
+        }
+        res.json(deletedThought);
+      })
+      .catch(err => res.status(400).json(err));
+  },
   createReaction() { },
   deleteReaction() { }
 };

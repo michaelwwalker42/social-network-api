@@ -3,7 +3,8 @@ const {
   createThought,
   getThoughts,
   getSingleThought,
-  updateThought
+  updateThought,
+  deleteThought
 } = require('../../controllers/thought-controller');
 
 
@@ -18,7 +19,7 @@ router
   .route('/:thoughtId')
   .get(getSingleThought)
   .put(updateThought)
-  .delete()
+  .delete(deleteThought)
 
 // reactions
 router
