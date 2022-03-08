@@ -76,8 +76,6 @@ const userController = {
           })
         // remove user from associated friends lists
         User.updateMany(
-          // The $in operator selects the documents where the value of a field equals any value in the specified array
-          { _id: { $in: userData.friends } },
           { $pull: { friends: req.params.userId } }
         )
           .then(userData => {
