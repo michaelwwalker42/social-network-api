@@ -28,11 +28,14 @@ Routes were tested with [Insomnia](https://insomnia.rest/)
   - [MongoDb](https://www.mongodb.com/)
   - [Mongoose ODM](https://mongoosejs.com/)
 ## Demos
+  - [Start Server](https://drive.google.com/file/d/1hIBkNCT2SSxew_L7iMNe-UW39Xd8JtTD/view)
+  - [User Routes ](https://drive.google.com/file/d/1fMXmvylpg3IHHzmKfMIMnqcjunr5gDwK/view)
+  - [Friend Routes ](https://drive.google.com/file/d/1K7Gw4_aHvNWKWBLCN-uHIPZ2m3nzSnzB/view)
+  - [Thought Routes ](https://drive.google.com/file/d/1dDIMQZqDI6EiJ6uC8Di4Ai2bMirL0Bgv/view)
+  - [Reaction Routes ](https://drive.google.com/file/d/1CeTisJdEVLVg6CAtpISdoohc1sW4hzRe/view)
+  - [Thoughts Lists Updated upon User Deletion](https://drive.google.com/file/d/1SIhHhvKrQIFFi2WT-Qy_E0XeEmDzLq76/view)
+  - [Friends Lists Updated upon User Deletion](https://drive.google.com/file/d/1xsVE7aInpwSBFYtkQzFdq7wUI6TccrdX/view)
 
-  - [User Routes Demo](https://drive.google.com/file/d/1fMXmvylpg3IHHzmKfMIMnqcjunr5gDwK/view)
-  - [Friend Routes Demo](https://drive.google.com/file/d/1K7Gw4_aHvNWKWBLCN-uHIPZ2m3nzSnzB/view)
-  - [Thought Routes Demo](https://drive.google.com/file/d/1dDIMQZqDI6EiJ6uC8Di4Ai2bMirL0Bgv/view)
-  - [Reaction Routes Demo](https://drive.google.com/file/d/1CeTisJdEVLVg6CAtpISdoohc1sW4hzRe/view)
 
 ## Api Routes 
 
